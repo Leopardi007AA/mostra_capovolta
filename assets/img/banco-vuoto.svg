@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-labelledby="t"><title id="t">Un banco di scuola con la sedia scostata, vuoti, davanti a una finestra da cui entra un fascio di luce</title>
+<defs><linearGradient id="b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a222a"/><stop offset="1" stop-color="#0f1317"/></linearGradient>
+<linearGradient id="beam" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e0a458" stop-opacity=".5"/><stop offset="1" stop-color="#e0a458" stop-opacity="0"/></linearGradient></defs>
+<rect width="800" height="450" fill="url(#b)"/>
+<rect y="370" width="800" height="80" fill="#0b0e11"/>
+<rect x="120" y="60" width="190" height="220" fill="#12181e" stroke="#3a4a58" stroke-width="3"/>
+<path d="M215 60V280M120 170H310" stroke="#3a4a58" stroke-width="3"/>
+<path d="M120 280 L430 370 L260 370 Z" fill="url(#beam)"/>
+<path d="M310 60 L600 370 L430 370 L310 280 Z" fill="url(#beam)" opacity=".5"/>
+<g fill="none" stroke="#a9b2ba" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<path d="M400 250 H640 L660 290 H420 Z" fill="#1c2630"/>
+<path d="M430 290 V372 M650 290 V372 M470 290 V338 M610 290 V338"/>
+<path d="M360 300 L330 372 M300 300 V372" opacity=".0"/>
+<path d="M240 270 L206 372" /><path d="M300 270 L330 372"/><path d="M230 270 H320 L322 310 H234 Z" fill="#1c2630"/>
+<path d="M240 222 L232 270 M310 222 L318 270 M240 222 H310" />
+</g>
+<ellipse cx="530" cy="378" rx="150" ry="9" fill="#000" opacity=".4"/>
+<text x="400" y="420" text-anchor="middle" font-family="Georgia,serif" font-size="14" fill="#6a7886" letter-spacing="3">SETTEMBRE 1938</text>
+</svg>

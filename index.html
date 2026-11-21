@@ -15,12 +15,15 @@
 <a class="skip" href="#main">Vai al contenuto</a>
 <div id="bar" aria-hidden="true"><i></i></div>
 <header id="top">
-  <a class="brand" href="#hero" aria-label="La mostra capovolta, torna all'inizio"><strong>La mostra capovolta</strong><span id="here" aria-live="off"></span></a>
+  <a class="brand" href="#hero" aria-label="La mostra capovolta, torna all'inizio">
+    <svg class="glyph" viewBox="0 0 24 28" aria-hidden="true"><rect x="3" y="2" width="18" height="24" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M12 2v24M12 14h4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+    <span class="bt"><strong>La mostra capovolta</strong><span id="here" aria-live="off"></span></span>
+  </a>
   <div class="tools">
     <span id="keys" role="status" aria-live="polite"></span>
-    <button type="button" id="idxBtn" aria-expanded="false" aria-controls="idx">Indice</button>
-    <button type="button" id="listen" hidden aria-pressed="false">Ascolta</button>
-    <button type="button" id="quick" aria-pressed="false">Lettura rapida</button>
+    <button type="button" class="tb" id="idxBtn" aria-expanded="false" aria-controls="idx"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h9" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span>Indice</span></button>
+    <button type="button" class="tb" id="listen" hidden aria-pressed="false"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 8v4h3l4 3V5L6 8H3z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M13 7.5c1.2 1.4 1.2 3.6 0 5M15.5 5.5c2.2 2.6 2.2 6.4 0 9" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span>Voce</span></button>
+    <button type="button" class="tb" id="quick" aria-pressed="false"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 3h9l3 3v11H4z M13 3v3h3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 10h6M7 13h6" stroke="currentColor" stroke-width="1.5"/></svg><span>Lettura rapida</span></button>
   </div>
   <nav id="idx" aria-label="Indice del percorso" hidden></nav>
 </header>

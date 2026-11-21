@@ -1,4 +1,4 @@
-# Cosa manca ancora (aggiornato 22 novembre 2026)
+# Cosa manca ancora (aggiornato 22 novembre 2026, dopo la riscrittura dei testi)
 
 Legenda: **[TU]** serve la scuola · **[FATTO]** già nel sito · **[OPZ]** facoltativo
 
@@ -49,3 +49,13 @@ Legenda: **[TU]** serve la scuola · **[FATTO]** già nel sito · **[OPZ]** faco
 - [ ] Prova con Safari/iPhone e Firefox, se disponibili [TU]
 - [ ] Prova solo tastiera (Tab/Invio) e con lettore di schermo, se disponibile [TU]
 - [ ] Prova di invio: aprire lo zip su un altro computer
+
+## Aggiornamento del 22 novembre
+- [FATTO] Dati della scuola e crediti (IIS «C. Rosatelli», 4SB, prof.ssa Marcelletti, 16 studenti)
+- [FATTO] Testi riscritti, fonti S1-S10 classificate per tipo. Corretto un errore: il Manifesto della razza è del **14 luglio 1938** (non 15)
+- [FATTO] Sala 7 su Rieti (1943-44) con fonte locale S9; 3 illustrazioni originali; «voce della classe» in ogni sala; voce narrante; nuova grafica
+- [TU] La «voce della classe» sono frasi scritte per voi: **leggetele, cambiatele, rendetele vostre**. Non attribuitele a singoli studenti senza il loro consenso
+- [TU] Dichiarazione IA: scritta in modo veritiero (Claude ha aiutato anche con ricerca, codice e prima stesura dei testi). Non va cambiata in «aiuto banale»
+- [TU] Confrontare la Sala 7 con l'Archivio di Stato di Rieti (fonte attuale: articolo di giornale locale)
+- [TU] Consensi per i nomi degli studenti nei crediti (la repo è pubblica)
+- [TU] Una testimonianza diretta (brano) e una foto/documento del vostro territorio

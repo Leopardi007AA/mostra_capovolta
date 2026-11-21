@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-labelledby="t"><title id="t">Una clessidra con la sabbia quasi tutta caduta nella metà inferiore</title>
+<rect width="800" height="450" fill="#0f1317"/>
+<g fill="none" stroke="#a9b2ba" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+<path d="M310 70H490M310 380H490"/>
+<path d="M330 70C330 160 400 190 400 225C400 260 330 290 330 380M470 70C470 160 400 190 400 225C400 260 470 290 470 380"/>
+</g>
+<path d="M352 115C372 150 400 168 400 168C400 168 428 150 448 115Z" fill="#e0a458" opacity=".85"/>
+<path d="M400 168V300" stroke="#e0a458" stroke-width="2"/>
+<path d="M336 380C340 330 372 300 400 296C428 300 460 330 464 380Z" fill="#e0a458" opacity=".9"/>
+<text x="400" y="425" text-anchor="middle" font-family="Georgia,serif" font-size="14" fill="#6a7886" letter-spacing="3">10 SECONDI</text>
+</svg>
