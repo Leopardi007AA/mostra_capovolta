@@ -1,1 +1,0 @@
-# mostra_capovolta
