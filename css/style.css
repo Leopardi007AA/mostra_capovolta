@@ -201,7 +201,27 @@ body.quick .hero-intro,.reduced .hero-intro{position:relative;opacity:1;margin-t
   .reveal{opacity:1;transform:none}.words span{opacity:1}
   .chapter{display:block}.stage{display:none}.flow{padding:10px 0}
   .mcard.locked .txt{filter:none}
-  section{break-inside:avoid-page}
+  @page{margin:15mm}.mcard,.facts li,.decoder,.tl li,.memoria{break-inside:avoid}
 }
 .hero-intro span{opacity:.18;transition:opacity .25s linear}.hero-intro span.on{opacity:1}
 body.quick .hero-intro span,.reduced .hero-intro span{opacity:1}
+
+/* nota per la giuria, memoria, cronologia, figure */
+.giuria{margin-top:2rem;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:4px 18px;max-width:52rem}
+.giuria summary{cursor:pointer;padding:14px 0;font-weight:700;min-height:44px}
+.giuria summary span{font-weight:400;color:var(--dim);font-size:.9rem}
+.giuria dl{display:grid;gap:0;margin:0 0 10px}
+.giuria dl div{padding:10px 0;border-top:1px solid var(--line);font-size:.95rem}
+.giuria dt{color:var(--accent);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin-bottom:.2rem}
+.memoria{border:1px solid var(--blue);border-radius:12px;padding:16px 18px;background:rgba(111,168,201,.08)}
+.memoria .kick{color:var(--blue);margin-bottom:.4rem}
+.memoria p{margin:0}.memoria .inv-m{margin-top:.6rem;font-size:.88rem;color:var(--dim)}
+.fig{margin:0}.fig img{width:100%;height:auto;border-radius:10px;display:block}.fig figcaption{font-size:.85rem;color:var(--dim);margin-top:.5rem}
+.tl{list-style:none;margin:2.5rem 0 0;padding:0 0 0 28px;position:relative;max-width:46rem}
+.tl::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.tl .tl-fill{position:absolute;left:6px;top:6px;width:2px;height:calc(var(--fill,0%) - 6px);max-height:calc(100% - 12px);background:var(--accent);padding:0;margin:0}
+.tl li:not(.tl-fill){position:relative;padding:0 0 28px}
+.tl li:not(.tl-fill)::before{content:"";position:absolute;left:-28px;top:.5em;width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+.tl time{display:block;font:700 1.1rem var(--serif);color:var(--accent)}
+.tl p{margin:.15rem 0 0}
+.reduced .tl .tl-fill,body.quick .tl .tl-fill{height:calc(100% - 12px)}

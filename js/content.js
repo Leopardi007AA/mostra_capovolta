@@ -37,8 +37,38 @@ window.CONTENT = {
     { id: "S3", text: "Francesco Cassata, «La Difesa della razza». Politica, ideologia e immagine del razzismo fascista, Einaudi, 2008. [Date e numeri della rivista: da verificare sul libro]", url: "" },
     { id: "S4", text: "Il Post, «Leggi razziali fasciste», 5 settembre 2018 (da integrare con il testo del decreto).", url: "https://www.ilpost.it/2018/09/05/leggi-razziali-fasciste/" },
     { id: "S5", text: "Ministero dell'istruzione e del merito, Bando «I giovani ricordano la Shoah», XXV edizione, a.s. 2026/2027.", url: "" },
-    { id: "S6", text: "[DA COMPLETARE] Fonte locale: archivio storico del comune, biblioteca civica, registri della scuola 1938-43.", url: "" }
+    { id: "S6", text: "Liliana Segre (voce «Liliana Segre», Wikipedia): nata nel 1930, nel 1938 espulsa dalla scuola elementare dopo le leggi razziali. Da integrare con una sua testimonianza diretta (Fondazione Memoriale della Shoah di Milano).", url: "https://en.wikipedia.org/wiki/Liliana_Segre" }
   ],
+
+  /* Nota per la giuria: come leggere il percorso */
+  giuria: {
+    title: "Nota per la giuria",
+    summary: "Come è fatto il percorso, come leggerlo e cosa abbiamo scelto di non fare",
+    items: [
+      { t: "Cos'è", d: "Un percorso web a scorrimento per la traccia della scuola secondaria di II grado: ruolo, linguaggi, strumenti e finalità della propaganda legata alla mostra «Der Ewige Jude» (1937) e al fascismo (1938), con analogie e differenze rispetto al linguaggio d'odio di oggi, tra social e intelligenza artificiale." },
+      { t: "Come si legge", d: "Scorrendo dall'alto, in circa 12-15 minuti. «Indice» salta a ogni sala; «Lettura rapida» sblocca tutto e disattiva le animazioni; «Ascolta» legge la sala corrente con la voce del browser; Ctrl+P stampa tutto il percorso." },
+      { t: "Cosa abbiamo scelto di non fare", d: "Non riproduciamo immagini o slogan di propaganda. Non scriviamo odio contro gruppi reali: i messaggi del 2027 riguardano un gruppo inventato e sono etichettati come simulazioni. Non ci sono pulsanti di condivisione, commenti o tracker." },
+      { t: "Fonti", d: "Ogni dato storico rimanda a una fonte numerata (S1…). L'elenco con i link è in fondo alla pagina; le fonti secondarie sono segnalate come da verificare." },
+      { t: "Età e sensibilità", d: "Gli esempi di linguaggio ostile compaiono sempre con una spiegazione accanto e mai come immagini. Il percorso è pensato per studentesse e studenti di scuola secondaria di II grado." }
+    ]
+  },
+
+  /* Cronologia */
+  timeline: {
+    kick: "Cronologia",
+    title: "Dal 1937 al 1944, in sette date",
+    lead: "I fatti che tengono insieme le sale. Dove la fonte è secondaria, la data è da verificare.",
+    items: [
+      { d: "8 novembre 1937", t: "A Monaco si inaugura la mostra «Der Ewige Jude».", s: "S2" },
+      { d: "Gennaio 1938", t: "La mostra chiude dopo 412.300 visitatori.", s: "S1" },
+      { d: "15 luglio 1938", t: "Il «Giornale d'Italia» pubblica il Manifesto della razza.", s: "S4" },
+      { d: "5 agosto 1938", t: "Esce il primo numero de «La difesa della razza».", s: "S3, da verificare" },
+      { d: "5 settembre 1938", t: "Un decreto allontana dalle scuole studenti e docenti ebrei.", s: "S4" },
+      { d: "1940", t: "Esce il film «Der Ewige Jude», derivato dalla mostra.", s: "S2" },
+      { d: "20 giugno 1943", t: "Esce l'ultimo numero de «La difesa della razza».", s: "S3, da verificare" },
+      { d: "20 gennaio 1944", t: "Primo decreto di abrogazione delle leggi razziali.", s: "S4" }
+    ]
+  },
 
   /* Stanza 2027 */
   stanza: {
@@ -130,6 +160,12 @@ window.CONTENT = {
         { text: "La rivista esce fino al 20 giugno 1943 e usa grafica, fotografie, vignette e fotomontaggi (S3, da verificare).", src: "S3" },
         { text: "5 settembre 1938: un decreto allontana dalle scuole studenti e docenti ebrei (S4).", src: "S4" }
       ],
+      memoria: {
+        kick: "Una voce",
+        text: "Liliana Segre è nata nel 1930. Nel 1938, dopo le leggi razziali, fu espulsa dalla scuola elementare. Dietro un decreto c'è una bambina che perde il posto in classe.",
+        src: "S6",
+        invito: "Per ascoltarla direttamente, cercate la sua testimonianza presso la Fondazione Memoriale della Shoah di Milano."
+      },
       labels: {
         Ruolo: "Dare al pregiudizio una veste di serietà.",
         Linguaggio: "Termini pseudoscientifici, appello agli «esperti», discorsi su «sangue» e «carattere».",

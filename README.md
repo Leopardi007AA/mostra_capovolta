@@ -14,3 +14,6 @@ Percorso web didattico per il concorso «I giovani ricordano la Shoah» (XXV edi
 - `Copia_stampabile_sito.pdf` · copia stampabile del sito
 - `Guida_Sec2_Mostra_Capovolta.pdf` · guida in 10 passi
 - `CHECKLIST_CONSEGNA.md` · cosa resta da fare
+
+- `MANCA.md` (nella radice) · elenco dettagliato di cosa resta da fare
+- Immagini: aggiungere `figure: { img, alt, caption, credit }` a una sala in `js/content.js`

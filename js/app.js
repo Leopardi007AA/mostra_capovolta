@@ -19,6 +19,14 @@
   function labelsHTML(l) { var h = '<dl class="labels">'; for (var k in l) { h += '<div><dt>' + esc(k) + '</dt><dd>' + esc(l[k]) + '</dd></div>'; } return h + '</dl>'; }
   function factsHTML(f) { return '<ul class="facts">' + f.map(function (x) { return '<li>' + esc(x.text) + '</li>'; }).join('') + '</ul>'; }
 
+  function figHTML(f) {
+    if (!f || !f.img) { return ''; }
+    return '<figure class="fig reveal"><img src="' + esc(f.img) + '" alt="' + esc(f.alt || '') + '" loading="lazy"><figcaption>' + esc(f.caption || '') + (f.credit ? ' <span class="src">Credito: ' + esc(f.credit) + '</span>' : '') + '</figcaption></figure>';
+  }
+  function memHTML(m) {
+    if (!m) { return ''; }
+    return '<aside class="memoria reveal"><p class="kick">' + esc(m.kick) + '</p><p>' + esc(m.text) + ' ' + src(m.src) + '</p>' + (m.invito ? '<p class="inv-m">' + esc(m.invito) + '</p>' : '') + '</aside>';
+  }
   var secs = [];   /* {id,label} per l'indice */
   var chapters = []; /* {el, update} */
   var html = '';
@@ -37,7 +45,8 @@
   html += '<section class="sec" id="inversioni" aria-label="Le tre inversioni"><div class="wrap"><p class="kick reveal">Come funziona questo sito</p>' +
     '<h2 class="reveal col">Tre inversioni rispetto a una mostra di propaganda</h2><div class="inv">' +
     C.inversioni.map(function (x) { return '<div class="reveal"><b>' + esc(x.n) + '</b><strong>' + esc(x.t) + '</strong><p>' + esc(x.d) + '</p></div>'; }).join('') +
-    '</div><p class="note reveal col">' + esc(C.meta.note) + '</p></div></section>';
+    '</div><p class="note reveal col">' + esc(C.meta.note) + '</p>' +
+    '<details class="giuria reveal"><summary>' + esc(C.giuria.title) + ' · <span>' + esc(C.giuria.summary) + '</span></summary><dl>' + C.giuria.items.map(function (x) { return '<div><dt>' + esc(x.t) + '</dt><dd>' + esc(x.d) + '</dd></div>'; }).join('') + '</dl></details></div></section>';
 
   /* ---------- Stanza 2027 ---------- */
   var st = C.stanza;
@@ -61,12 +70,18 @@
     }).join('');
     html += '<section class="chapter" id="sala' + r.key + '" aria-label="Sala ' + r.key + '" data-scene="' + esc(r.scene) + '" data-total="' + total + '"><div class="stage"><div class="stage-in"><svg viewBox="0 0 400 300" role="img" aria-label="Animazione: ' + esc(r.caption) + '"></svg><p class="stage-cap">' + esc(r.caption) + '</p></div></div>' +
       '<div class="flow"><header class="ch-head reveal"><p class="kick">Sala ' + r.key + ' di ' + C.rooms.length + '</p><h2 tabindex="-1">' + esc(r.title) + '</h2><p class="lead">' + esc(r.lead) + '</p></header>' +
-      '<p class="story words" data-w>' + esc(r.story) + '</p><div class="reveal">' + factsHTML(r.facts) + '</div><div class="reveal"><h3>Ruolo · linguaggio · strumento · finalità</h3>' + labelsHTML(r.labels) + '</div>' +
+      '<p class="story words" data-w>' + esc(r.story) + '</p>' + figHTML(r.figure) + '<div class="reveal">' + factsHTML(r.facts) + '</div>' + memHTML(r.memoria) + '<div class="reveal"><h3>Ruolo · linguaggio · strumento · finalità</h3>' + labelsHTML(r.labels) + '</div>' +
       '<div class="decoder reveal"><h3>Smaschera il messaggio</h3><p class="help">Clicca le frasi sottolineate del messaggio simulato: scopri il meccanismo e da dove viene.</p>' +
       '<span class="sim-badge">Simulazione didattica · gruppo inventato</span><p class="msg">' + msg + '</p><p class="progress" id="prog' + r.key + '" aria-live="polite"></p><div class="reveals" id="rev' + r.key + '"></div><div id="kb' + r.key + '"></div></div>' +
       '<p class="then reveal"><b>1937.</b> ' + esc(r.then) + '<br><b>2027.</b> ' + esc(r.diff) + '</p></div></section>';
     secs.push({ id: 'sala' + r.key, label: 'Sala ' + r.key + ' · ' + r.title });
   });
+
+  /* ---------- Cronologia ---------- */
+  var tl = C.timeline;
+  html += '<section class="sec" id="cronologia" aria-label="Cronologia"><div class="wrap"><p class="kick reveal">' + esc(tl.kick) + '</p><h2 class="reveal col">' + esc(tl.title) + '</h2><p class="lead col reveal">' + esc(tl.lead) + '</p>' +
+    '<ol class="tl" id="tl"><li class="tl-fill" aria-hidden="true"></li>' + tl.items.map(function (x) { return '<li class="reveal"><time>' + esc(x.d) + '</time><p>' + esc(x.t) + ' ' + src(x.s) + '</p></li>'; }).join('') + '</ol></div></section>';
+  secs.push({ id: 'cronologia', label: 'Cronologia 1937-1944' });
 
   /* ---------- Sala 6 ---------- */
   var s6 = C.sala6;
@@ -246,6 +261,8 @@
       var n = Math.round(q * w.spans.length);
       if (n !== w.on) { w.spans.forEach(function (s, i) { s.classList.toggle('on', i < n); }); w.on = n; }
     });
+    var tlEl = document.getElementById('tl');
+    if (tlEl) { var tr = tlEl.getBoundingClientRect(); tlEl.style.setProperty('--fill', (calm ? 1 : clamp((vh * 0.65 - tr.top) / Math.max(1, tr.height), 0, 1)) * 100 + '%'); }
     var cur = currentSection();
     if (cur && cur.id !== current) {
       current = cur.id;
