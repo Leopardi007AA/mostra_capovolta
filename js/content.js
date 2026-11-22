@@ -9,23 +9,6 @@
      vanno lette e, se serve, riscritte dagli studenti.
    ===================================================================== */
 window.CONTENT = {
-  /* Voce: solo i passaggi più forti, scritti per essere ascoltati. Se esiste assets/audio/<id>.mp3 viene usato quello (voce registrata). */
-  voce: {
-    hero: "L'otto novembre millenovecentotrentasette, a Monaco, si apre una mostra. Si chiama Der Ewige Jude. La visitano più di quattrocentomila persone, col biglietto in mano e il cappotto sul braccio. Nessun segreto. È questo che ci inquieta di più.",
-    stanza: "Questi messaggi li abbiamo scritti noi, su un gruppo che non esiste. Scriverli ci è costato fatica, ed è sorprendente quanto sia facile: bastano tre frasi, e suonano già familiari. Questa familiarità è il dato più grave di tutta la ricerca.",
-    sala0: "La mostra presenta gli ebrei come un corpo estraneo. Cartelli, vetrine, giornali esposti come in un museo. Più di cinquemila persone al giorno ci entrano per informarsi.",
-    sala1: "Ogni propaganda parte da una linea. Da una parte noi, dall'altra loro. Il nemico non è la causa della paura: è il suo indirizzo.",
-    sala2: "Il secondo passo cancella i nomi e le facce. Chi ha un nome ci obbliga a rispondere. Chi è soltanto un tipo, no.",
-    sala3: "Il quattordici luglio millenovecentotrentotto esce il Manifesto della razza. Il cinque settembre, un decreto vieta l'iscrizione scolastica agli alunni ebrei. In meno di due mesi, il pregiudizio passa dalla pagina del giornale ai registri di classe. Per un giorno ci siamo chiesti dove saremmo stati noi: in un banco, in cattedra, o seduti dietro a un compagno che non c'era più.",
-    sala4: "Un messaggio ripetuto cento volte non fa più rumore. La parte che ci fa più paura è la noia: l'odio non arriva con la musica dei film, arriva come un modulo da compilare.",
-    sala5: "Chi non si riconosce nel grido può essere raggiunto da un sussurro. Oggi nessuno ci scrive un messaggio diverso: lo fa un feed, in silenzio.",
-    cronologia: "Dodici date, dal millenovecentotrentasette al millenovecentoquarantaquattro. Ognuna ha la sua fonte, e dove è secondaria, lo diciamo.",
-    sala6: "Dire che oggi è come allora è comodo, ed è sbagliato. Allora c'era un regime, e la colpa aveva un volto. Oggi la colpa è distribuita, e quindi nessuno si sente colpevole. Per questo l'unica difesa possibile è quella personale, ogni giorno, nelle cose piccole.",
-    uscita: "Prima di condividere qualsiasi cosa, fermati dieci secondi. Sono quelli che sono mancati a quattrocentomila persone nel millenovecentotrentasette, e che mancano ogni giorno a ciascuno di noi.",
-    territorio: "La storia non è successa solo altrove. È successa anche a pochi chilometri da dove studiamo.",
-    fonti: "Ogni dato di questo percorso ha una fonte, e le abbiamo messe qui, perché possiate controllarci."
-  },
-
   meta: {
     title: "La mostra capovolta",
     school: "IIS «C. Rosatelli» · Rieti · classe 4SB",

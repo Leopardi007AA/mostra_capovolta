@@ -32,6 +32,7 @@
   }
   var secs = [];   /* {id,label} per l'indice */
   var chapters = []; /* {el, update} */
+  var small = window.matchMedia('(max-width:860px)'), SMALL_HH = 59;
   var html = '';
 
   /* ---------- HERO ---------- */
@@ -59,7 +60,7 @@
 
   /* ---------- Sala 0 ---------- */
   var s0 = C.sala0;
-  html += '<section class="chapter" id="sala0" aria-label="Sala 0" data-scene="contesto"><div class="stage"><div class="stage-in"><svg viewBox="0 0 400 300" role="img" aria-label="Cento quadratini che si riempiono fino a rappresentare 412.300 visitatori"></svg><p class="stage-cap">' + esc(s0.counter.label) + ' · ' + esc(s0.counter.note) + '</p></div></div>' +
+  html += '<section class="chapter" id="sala0" aria-label="Sala 0" data-scene="contesto"><div class="pin"><div class="stage"><div class="stage-in"><svg viewBox="0 0 400 300" role="img" aria-label="Cento quadratini che si riempiono fino a rappresentare 412.300 visitatori"></svg><p class="stage-cap">' + esc(s0.counter.label) + ' · ' + esc(s0.counter.note) + '</p></div></div></div>' +
     '<div class="flow"><header class="ch-head reveal"><p class="kick">' + esc(s0.kick) + '</p><h2 tabindex="-1">' + esc(s0.title) + '</h2><p class="lead">' + esc(s0.lead) + '</p></header>' +
     '<p class="story words" data-w>' + esc(s0.story) + '</p>' + classeHTML(s0.classe) + '<div class="reveal">' + factsHTML(s0.facts) + '</div><div class="reveal"><h3>Cosa fa questa mostra</h3>' + labelsHTML(s0.labels) + '</div></div></section>';
   secs.push({ id: 'sala0', label: 'Sala 0 · 1937' });
@@ -71,7 +72,7 @@
       var m = part.match(/^\{\{(\w+)\|([^}]+)\}\}$/);
       return m ? '<button type="button" class="hl" data-room="' + r.key + '" data-id="' + m[1] + '">' + esc(m[2]) + '</button>' : esc(part);
     }).join('');
-    html += '<section class="chapter" id="sala' + r.key + '" aria-label="Sala ' + r.key + '" data-scene="' + esc(r.scene) + '" data-total="' + total + '"><div class="stage"><div class="stage-in"><svg viewBox="0 0 400 300" role="img" aria-label="Animazione: ' + esc(r.caption) + '"></svg><p class="stage-cap">' + esc(r.caption) + '</p></div></div>' +
+    html += '<section class="chapter" id="sala' + r.key + '" aria-label="Sala ' + r.key + '" data-scene="' + esc(r.scene) + '" data-total="' + total + '"><div class="pin"><div class="stage"><div class="stage-in"><svg viewBox="0 0 400 300" role="img" aria-label="Animazione: ' + esc(r.caption) + '"></svg><p class="stage-cap">' + esc(r.caption) + '</p></div></div></div>' +
       '<div class="flow"><header class="ch-head reveal"><p class="kick">Sala ' + r.key + ' di ' + C.rooms.length + '</p><h2 tabindex="-1">' + esc(r.title) + '</h2><p class="lead">' + esc(r.lead) + '</p></header>' +
       '<p class="story words" data-w>' + esc(r.story) + '</p>' + classeHTML(r.classe) + figHTML(r.figure) + '<div class="reveal">' + factsHTML(r.facts) + '</div>' + memHTML(r.memoria) + '<div class="reveal"><h3>Ruolo · linguaggio · strumento · finalità</h3>' + labelsHTML(r.labels) + '</div>' +
       '<div class="decoder reveal"><h3>Smaschera il messaggio</h3><p class="help">Clicca le frasi sottolineate del messaggio simulato: scopri il meccanismo e da dove viene.</p>' +
@@ -133,7 +134,7 @@
   /* ---------- scene ---------- */
   Array.prototype.forEach.call(document.querySelectorAll('.chapter'), function (ch) {
     var name = ch.getAttribute('data-scene'), svg = ch.querySelector('svg');
-    if (SC[name] && svg) { chapters.push({ el: ch, update: SC[name](svg) }); }
+    if (SC[name] && svg) { chapters.push({ el: ch, pin: ch.querySelector('.pin'), update: SC[name](svg) }); }
   });
 
   /* ---------- Stanza 2027 ---------- */
@@ -218,57 +219,67 @@
   }
   quickBtn.addEventListener('click', function () { setQuick(!state.quick); });
 
-  /* ---------- voce: solo i passaggi più forti (C.voce), voce registrata se presente, altrimenti sintesi del browser ---------- */
-  var listenBtn = document.getElementById('listen'), narrOn = false, narrTimer = null, voice = null, narrSec = '', audioEl = null, token = 0;
+  /* ---------- voce: legge il testo che hai davanti, andando avanti mentre scorri; ogni blocco una sola volta ---------- */
+  var listenBtn = document.getElementById('listen'), narrOn = false, voice = null, token = 0, curBlk = null, readSet = [], idleT = null;
   var synth = window.speechSynthesis, hasTTS = !!(synth && window.SpeechSynthesisUtterance);
+  var BLK = '.hero-intro,.ch-head h2,.ch-head .lead,.story,.classe p,.memoria p,p.col,h2.col,.then';
   function pickVoice() {
     if (!hasTTS) { return; }
-    var vs = synth.getVoices().filter(function (v) { return /^it/i.test(v.lang); });
+    var vs = synth.getVoices().filter(function (v) { return /^it/i.test(v.lang.replace('_', '-')); });
     function score(v) {
-      var n = v.name + ' ', sc = 0;
-      if (/natural|neural|online|premium|enhanced|wavenet|studio/i.test(n)) { sc += 10; }
-      if (/elsa|isabella|diego|giorgio|luca|cosimo|paola|alice|federica|google/i.test(n)) { sc += 4; }
-      if (/compact|espeak|robot/i.test(n)) { sc -= 8; }
+      var n = v.name, sc = 0;
+      if (/natural|neural|online|premium|enhanced|wavenet|studio/i.test(n)) { sc += 12; }
+      if (/google/i.test(n)) { sc += 8; }
+      if (/elsa|isabella|diego|giorgio|luca|cosimo|paola|federica|alice/i.test(n)) { sc += 3; }
+      if (/compact|espeak|robot|pico/i.test(n)) { sc -= 10; }
       if (!v.localService) { sc += 2; }
       return sc;
     }
     vs.sort(function (a, b) { return score(b) - score(a); });
     voice = vs[0] || null;
   }
-  function stopVoice() {
-    token++; clearTimeout(narrTimer);
-    if (hasTTS) { synth.cancel(); }
-    if (audioEl) { try { audioEl.pause(); } catch (e) {} audioEl = null; }
+  function blkText(el) { return (el.innerText || el.textContent || '').replace(/\[S\d+[^\]]*\]/g, '').replace(/\s+/g, ' ').trim(); }
+  function inBand(el) {
+    var r = el.getBoundingClientRect(), vh = window.innerHeight;
+    if (r.height < 4 || r.bottom < 70 || r.top > vh * 0.72) { return false; }
+    var cs = window.getComputedStyle(el); if (parseFloat(cs.opacity) < 0.5 || cs.visibility === 'hidden') { return false; }
+    return true;
   }
-  function speakTTS(text, my) {
-    var parts = text.match(/[^.!?]+[.!?]*/g) || [text], i = 0;
+  function nextBlock() {
+    var all = document.querySelectorAll(BLK);
+    for (var k = 0; k < all.length; k++) { if (readSet.indexOf(all[k]) < 0 && inBand(all[k]) && blkText(all[k]).length > 8) { return all[k]; } }
+    return null;
+  }
+  function stopVoice() { token++; clearTimeout(idleT); curBlk = null; if (hasTTS) { synth.cancel(); } }
+  function readBlock(el) {
+    var my = ++token; curBlk = el; if (hasTTS) { synth.cancel(); }
+    var parts = blkText(el).split(/(?<=[.!?;:])\s+/), i = 0;
     (function next() {
-      if (my !== token || !narrOn || i >= parts.length) { return; }
+      if (my !== token || !narrOn) { return; }
+      if (i >= parts.length) { readSet.push(el); curBlk = null; idleT = setTimeout(narrTick, 500); return; }
       var u = new SpeechSynthesisUtterance(parts[i++].trim());
-      u.lang = 'it-IT'; if (voice) { u.voice = voice; } u.pitch = 0.8; u.rate = 0.88; u.volume = 1;
-      u.onend = function () { setTimeout(next, 380); }; u.onerror = function () { setTimeout(next, 80); };
+      u.lang = 'it-IT'; if (voice) { u.voice = voice; } u.pitch = 1; u.rate = 0.92; u.volume = 1;
+      u.onend = function () { setTimeout(next, 260); }; u.onerror = function () { setTimeout(next, 60); };
       synth.speak(u);
     })();
   }
-  function speak(sec) {
-    var text = C.voce && C.voce[sec.id];
-    stopVoice(); narrSec = sec.id; if (!text) { return; }
-    var my = token;
-    try {
-      var a = new Audio('assets/audio/' + sec.id + '.mp3'); a.preload = 'auto'; audioEl = a; var started = false;
-      a.addEventListener('playing', function () { started = true; });
-      a.addEventListener('error', function () { if (my === token && !started) { audioEl = null; if (hasTTS) { speakTTS(text, my); } } });
-      var pr = a.play(); if (pr && pr.catch) { pr.catch(function () { if (my === token && !started && hasTTS) { audioEl = null; speakTTS(text, my); } }); }
-    } catch (e) { if (hasTTS) { speakTTS(text, my); } }
+  function narrTick() {
+    if (!narrOn) { return; }
+    if (curBlk) { if (inBand(curBlk)) { return; } stopVoice(); }  /* se hai scrollato via, smette e passa al testo dove sei */
+    var b = nextBlock(); if (b) { readBlock(b); }
   }
-  function narrFollow(sec) { if (!narrOn || !sec || sec.id === narrSec) { return; } clearTimeout(narrTimer); narrTimer = setTimeout(function () { var c = currentSection(); if (narrOn && c) { speak(c); } }, 1100); }
-  listenBtn.hidden = false; pickVoice();
-  if (hasTTS && synth.addEventListener) { synth.addEventListener('voiceschanged', pickVoice); }
-  listenBtn.addEventListener('click', function () {
-    narrOn = !narrOn; listenBtn.setAttribute('aria-pressed', narrOn ? 'true' : 'false');
-    if (narrOn) { pickVoice(); var c = currentSection(); if (c) { speak(c); } toast('Voce attiva: ti accompagna nei passaggi principali'); }
-    else { stopVoice(); narrSec = ''; }
-  });
+  var narrScrollT = null;
+  window.addEventListener('scroll', function () { if (narrOn) { clearTimeout(narrScrollT); narrScrollT = setTimeout(narrTick, 450); } }, { passive: true });
+  function narrFollow() {}
+  if (hasTTS) {
+    listenBtn.hidden = false; pickVoice();
+    if (synth.addEventListener) { synth.addEventListener('voiceschanged', pickVoice); }
+    listenBtn.addEventListener('click', function () {
+      narrOn = !narrOn; listenBtn.setAttribute('aria-pressed', narrOn ? 'true' : 'false');
+      if (narrOn) { pickVoice(); readSet = []; toast('Voce attiva: legge il testo che hai davanti'); narrTick(); }
+      else { stopVoice(); }
+    });
+  }
 
   /* ---------- scorrimento ---------- */
   var heroEl = document.getElementById('hero'), heroIn = heroEl.querySelector('.hero-in');
@@ -293,7 +304,9 @@
     chapters.forEach(function (c) {
       var r = c.el.getBoundingClientRect();
       if (r.bottom < -vh * 0.5 || r.top > vh * 1.5) { return; }
-      c.update(calm ? 1 : clamp(-r.top / Math.max(1, r.height - vh), 0, 1));
+      var pr = c.pin && small.matches ? c.pin.getBoundingClientRect() : null;
+      if (pr) { c.update(calm ? 1 : clamp((SMALL_HH - pr.top) / Math.max(1, pr.height - (vh - SMALL_HH)), 0, 1)); }
+      else { c.update(calm ? 1 : clamp(-r.top / Math.max(1, r.height - vh), 0, 1)); }
     });
     wordEls.forEach(function (w) {
       var r = w.el.getBoundingClientRect();
