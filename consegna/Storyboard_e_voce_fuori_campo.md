@@ -1,6 +1,6 @@
-# Film-tour (4:42, limite del bando: 5 minuti)
+# Film-tour (4:48, limite del bando: 5 minuti)
 
-Il film `Film_tour_4m42s.mp4` è una registrazione del sito con didascalie. Per renderlo più forte, la classe può aggiungere **una voce fuori campo** (registrata con il telefono o Audacity) leggendo i testi qui sotto, e ri-registrare le didascalie finali con nome della scuola.
+Il film `Film_tour.mp4` è una registrazione del sito con didascalie. Per renderlo più forte, la classe può aggiungere **una voce fuori campo** (registrata con il telefono o Audacity) leggendo i testi qui sotto, e ri-registrare le didascalie finali con nome della scuola.
 
 | Tempo | Scena | Voce fuori campo (proposta, da riscrivere con parole vostre) |
 |---|---|---|
@@ -13,6 +13,6 @@ Il film `Film_tour_4m42s.mp4` è una registrazione del sito con didascalie. Per 
 | 2:45–3:30 | Sale 2–5 | «Togliere l'umano, mescolare i linguaggi, renderlo normale, parlare a ciascuno.» |
 | 3:30–4:05 | Sala 6 | «Analogie e differenze: nel 1937 un regime, oggi molti utenti e l'intelligenza artificiale.» |
 | 4:05–4:30 | Pausa e impegno | «Prima di condividere, dieci secondi.» |
-| 4:30–4:42 | Fonti e crediti | «Fonti, scuola e classe.» |
+| 4:30–4:48 | Fonti e crediti | «Fonti, scuola e classe.» |
 
 Consiglio: sostituire nel film la didascalia finale «[SCUOLA · CLASSE/I]» dopo aver compilato `js/content.js` (rigenerabile).

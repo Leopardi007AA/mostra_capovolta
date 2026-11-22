@@ -8,7 +8,7 @@ Percorso web didattico per il concorso «I giovani ricordano la Shoah» (XXV edi
 - I messaggi della «Stanza 2027» sono simulazioni didattiche su un gruppo inventato.
 
 ## Cartella `consegna/`
-- `Film_tour_4m42s.mp4` · film-tour (4:42) del sito
+- `Film_tour.mp4` · film-tour (4:48) del sito
 - `Storyboard_e_voce_fuori_campo.md` · scaletta e testo per la voce
 - `Scheda_del_percorso.pdf` · scheda di una pagina (da compilare)
 - `Copia_stampabile_sito.pdf` · copia stampabile del sito

@@ -114,7 +114,7 @@ window.CONTENT = {
       key: 1, scene: "noi-loro", title: "Nominare il nemico",
       lead: "Prima si decide chi è «dentro» e chi è «fuori».",
       story: "Ogni propaganda parte da una linea. Da una parte «noi», dall'altra «loro». Non serve dimostrare nulla: basta ripeterlo finché la linea sembra naturale. La propaganda nazista descrisse gli ebrei come un corpo estraneo che viveva a spese della nazione, ne avvelenava la cultura e ne prendeva l'economia. Una comunità si sente più unita quando può indicare chi non ne fa parte. Il nemico non è la causa della paura: è il suo indirizzo.",
-      classe: "«Noi» è la parola più comoda che esista: non costa niente e scalda. Ma per scaldare qualcuno deve restare fuori al freddo. Lo vediamo nelle chat di classe, molto prima che nei libri di storia.",
+      classe: "La parola «noi» è la più comoda che esista: non costa niente e scalda. Ma per scaldare qualcuno deve restare fuori al freddo. Lo vediamo nelle chat di classe, molto prima che nei libri di storia.",
       caption: "Scorri: una linea compare e un gruppo viene spostato dall'altra parte.",
       facts: [
         { text: "Gli ebrei erano raffigurati come un «corpo estraneo» che viveva a spese della nazione che li ospitava (S1).", src: "S1" },

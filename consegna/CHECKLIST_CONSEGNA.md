@@ -1,19 +1,27 @@
-# Checklist di consegna (bando XXV edizione, a.s. 2026/2027)
+# Checklist di consegna — scadenza: LUNEDÌ 23 NOVEMBRE 2026, ore 23.59.59
 
-Scadenza della scuola verso l'USR: **lunedì 23 novembre 2026, ore 23.59.59** (invia la scuola, non gli studenti). Verificare sul bando le modalità di invio.
+Chi invia: **la scuola** (non gli studenti), all'Ufficio Scolastico Regionale (USR Lazio), oggetto esatto:
+**Concorso I giovani ricordano la Shoah a.s. 2026/2027**, con in copia (per conoscenza) il Referente regionale per la didattica della Shoah.
 
-## Da fare prima dell'invio
-- [ ] In `js/content.js` sostituire `[SCUOLA · CLASSE/I]`, `[NOME]`, `[DA COMPLETARE]` (crediti, uso dell'IA). Controllare con Ctrl+F.
-- [ ] Controllare date e fonti: numero del decreto del 5 settembre 1938, date de «La difesa della razza» (S3), dato dei 412.300 visitatori (S1).
-- [ ] (Facoltativo, consigliato) attivare la Sala 7 con fonti locali: `territorio.enabled: true`.
-- [ ] Riscrivere l'impegno della classe con parole vostre.
-- [ ] Test con 3 persone esterne (30 secondi per capire cosa fare).
-- [ ] Docente compila **Allegato 1**; consensi GDPR conservati dalla scuola (art. 9).
-- [ ] Compilare `Scheda_del_percorso.pdf` (campi tra parentesi quadre).
-- [ ] Consegnare: zip del sito + film (max 5 minuti) + scheda + eventuale link.
+## Cosa allegare (cartella `consegna/`)
+1. `Allegato_1_compilato.docx` → completare i campi vuoti (vedi sotto), farlo firmare digitalmente dal Dirigente, poi allegarlo (digitale).
+2. `Scheda_del_percorso.pdf` (scheda riassuntiva).
+3. `Film_tour.mp4` (max 5 minuti, art. 2 c. 6: rispettato).
+4. `mostra_capovolta.zip` (il sito: estrarre e aprire `index.html`; funziona anche offline).
+5. `Copia_stampabile_sito.pdf` (copia di lettura, per il plico cartaceo se richiesto).
+6. Il link online (GitHub Pages), se attivato: scriverlo nel corpo della mail.
+Se la mail supera il limite di peso: mandare il film e lo zip via link (Drive/scuola) nel corpo della mail.
 
-## Controlli già eseguiti
-- Nessuna richiesta di rete esterna; nessun tracker; `noindex`.
-- Contrasti testo/sfondo tra 4,6:1 e 15:1 (soglia 4,5:1).
-- Prova in Chrome su 390 px e 1280 px, nessun errore in console; lettura rapida, indice, decodificatore, quiz e Pausa funzionanti.
-- Funziona aprendo `index.html` da file (offline).
+## Campi dell'Allegato 1 che solo la scuola può completare
+- [ ] Via/indirizzo, telefono scuola, e-mail scuola
+- [ ] Nome del Dirigente scolastico + firma digitale
+- [ ] Telefono del docente di riferimento
+- [ ] Casella «La scuola ha raccolto il consenso…»: spuntare **solo se vero** (consensi GDPR firmati da famiglie/maggiorenni, conservati agli atti: art. 9 del bando)
+- [ ] Tabella B: numero di docenti coinvolti per disciplina e totale
+- [ ] Tabella C: esterni (testimoni, esperti, supporto tecnico) — se nessuno, scrivere 0
+
+## Prima di inviare
+- [ ] Consensi per i nomi degli studenti nei crediti (altrimenti toglierli da `uscita.credits` in `js/content.js`)
+- [ ] Rileggere i testi in classe: la «voce della classe» è una proposta, va resa vostra
+- [ ] Aprire lo zip su un altro computer e provare il sito
+- [ ] Provare il link su 2 telefoni
