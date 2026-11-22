@@ -7,8 +7,10 @@
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduce) { root.classList.add('reduced'); }
   var state = { keys: {}, found: {}, quick: false };
-  try { var sv = sessionStorage.getItem('mc2'); if (sv) { var o = JSON.parse(sv); if (o && o.keys) { state = o; } } } catch (e) {}
-  function save() { try { sessionStorage.setItem('mc2', JSON.stringify(state)); } catch (e) {} }
+  /* Nessuna persistenza: a ogni ricarica il percorso riparte da zero. */
+  try { sessionStorage.removeItem('mc2'); } catch (e) {}
+  try { if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; } if (location.hash) { history.replaceState(null, '', location.pathname + location.search); } } catch (e) {}
+  function save() {}
 
   function esc(t) { return String(t == null ? '' : t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
   function plain(m) { return m.replace(/\{\{\w+\|([^}]+)\}\}/g, '$1'); }
@@ -94,7 +96,7 @@
   });
   html += '<h3 class="reveal">Cosa NON è uguale</h3><div class="grid reveal">' + s6.notEqual.map(function (x) { return '<div class="card"><h3>' + esc(x.t) + '</h3><p>' + esc(x.d) + '</p></div>'; }).join('') + '</div>' +
     '<p class="kick reveal" style="margin-top:3rem">' + esc(s6.fakesKick) + '</p><h3 class="reveal">' + esc(s6.fakesTitle) + '</h3><p class="col reveal">' + esc(s6.fakesLead) + '</p><div class="grid">' +
-    s6.fakes.map(function (f, i) { return '<div class="card reveal"><p class="post">' + esc(f.post) + '</p><div class="row"><button type="button" data-fake="' + i + '" data-ans="yes">Posso verificarlo</button><button type="button" data-fake="' + i + '" data-ans="no">Non posso verificarlo</button></div><p class="fb" id="fb' + i + '" aria-live="polite"></p></div>'; }).join('') +
+    s6.fakes.map(function (f, i) { return '<div class="card fake reveal"><span class="fk">Post ' + (i + 1) + ' di ' + s6.fakes.length + '</span><p class="post">' + esc(f.post) + '</p><p class="ask">Con quello che vedi, puoi verificare che sia vero?</p><div class="row"><button type="button" data-fake="' + i + '" data-ans="yes">Sì, posso verificarlo</button><button type="button" data-fake="' + i + '" data-ans="no">No, non posso</button></div><p class="fb" id="fb' + i + '" aria-live="polite"></p></div>'; }).join('') +
     '</div></div></section>';
   secs.push({ id: 'sala6', label: 'Sala 6 · 1937 ↔ 2027' });
 
@@ -181,7 +183,9 @@
     if (t.classList.contains('hl')) { onHL(t); return; }
     var i = parseInt(t.getAttribute('data-fake'), 10), f = C.sala6.fakes[i], fb = document.getElementById('fb' + i);
     var ok = (t.getAttribute('data-ans') === 'no') === !!f.isFake;
-    fb.className = 'fb ' + (ok ? 'ok' : 'no'); fb.textContent = (ok ? 'Esatto. ' : 'Non proprio. ') + f.explain;
+    fb.className = 'fb ' + (ok ? 'ok' : 'no'); fb.innerHTML = '<strong>' + (ok ? 'Esatto.' : 'Non proprio.') + '</strong> ' + esc(f.explain);
+    Array.prototype.forEach.call(t.parentNode.children, function (b) { b.classList.remove('sel'); b.setAttribute('aria-pressed', 'false'); });
+    t.classList.add('sel'); t.setAttribute('aria-pressed', 'true');
   });
   document.addEventListener('input', function (e) {
     var t = e.target;
@@ -214,43 +218,57 @@
   }
   quickBtn.addEventListener('click', function () { setQuick(!state.quick); });
 
-  /* ---------- voce narrante (sintesi vocale del browser, se disponibile) ---------- */
-  var listenBtn = document.getElementById('listen'), narrOn = false, narrTimer = null, voice = null, narrSec = '';
-  var synth = window.speechSynthesis;
+  /* ---------- voce: solo i passaggi più forti (C.voce), voce registrata se presente, altrimenti sintesi del browser ---------- */
+  var listenBtn = document.getElementById('listen'), narrOn = false, narrTimer = null, voice = null, narrSec = '', audioEl = null, token = 0;
+  var synth = window.speechSynthesis, hasTTS = !!(synth && window.SpeechSynthesisUtterance);
   function pickVoice() {
-    if (!synth) { return; }
+    if (!hasTTS) { return; }
     var vs = synth.getVoices().filter(function (v) { return /^it/i.test(v.lang); });
-    var pref = /luca|cosimo|diego|paolo|riccardo|male|uomo|google italiano/i;
-    voice = vs.filter(function (v) { return pref.test(v.name); })[0] || vs[0] || null;
+    function score(v) {
+      var n = v.name + ' ', sc = 0;
+      if (/natural|neural|online|premium|enhanced|wavenet|studio/i.test(n)) { sc += 10; }
+      if (/elsa|isabella|diego|giorgio|luca|cosimo|paola|alice|federica|google/i.test(n)) { sc += 4; }
+      if (/compact|espeak|robot/i.test(n)) { sc -= 8; }
+      if (!v.localService) { sc += 2; }
+      return sc;
+    }
+    vs.sort(function (a, b) { return score(b) - score(a); });
+    voice = vs[0] || null;
   }
-  function narrText(sec) {
-    var sels = ['.hero-front .kick', '.hero-front .deck', '#heroIntro', '.kick', 'h2', '.lead', '.story', '.classe p', '.memoria p', '.col', '.then'];
-    var seen = [], out = [];
-    sels.forEach(function (q) { Array.prototype.forEach.call(sec.querySelectorAll(q), function (n) { if (seen.indexOf(n) < 0) { seen.push(n); var t = (n.innerText || n.textContent || '').trim(); if (t && out.indexOf(t) < 0) { out.push(t); } } }); });
-    return out.join(' ').replace(/\[S\d+[^\]]*\]/g, '').replace(/\s+/g, ' ');
+  function stopVoice() {
+    token++; clearTimeout(narrTimer);
+    if (hasTTS) { synth.cancel(); }
+    if (audioEl) { try { audioEl.pause(); } catch (e) {} audioEl = null; }
   }
-  function speak(sec) {
-    if (!synth) { return; }
-    synth.cancel(); narrSec = sec.id;
-    var parts = narrText(sec).match(/[^.!?]+[.!?]*/g) || [], i = 0;
+  function speakTTS(text, my) {
+    var parts = text.match(/[^.!?]+[.!?]*/g) || [text], i = 0;
     (function next() {
-      if (!narrOn || narrSec !== sec.id || i >= parts.length) { return; }
+      if (my !== token || !narrOn || i >= parts.length) { return; }
       var u = new SpeechSynthesisUtterance(parts[i++].trim());
-      u.lang = 'it-IT'; if (voice) { u.voice = voice; } u.pitch = 0.45; u.rate = 0.82; u.volume = 1;
-      u.onend = next; u.onerror = function () { setTimeout(next, 50); };
+      u.lang = 'it-IT'; if (voice) { u.voice = voice; } u.pitch = 0.8; u.rate = 0.88; u.volume = 1;
+      u.onend = function () { setTimeout(next, 380); }; u.onerror = function () { setTimeout(next, 80); };
       synth.speak(u);
     })();
   }
-  function narrFollow(sec) { if (!narrOn || !sec || sec.id === narrSec) { return; } clearTimeout(narrTimer); narrTimer = setTimeout(function () { var c = currentSection(); if (narrOn && c) { speak(c); } }, 900); }
-  if (synth && window.SpeechSynthesisUtterance) {
-    listenBtn.hidden = false; pickVoice();
-    if (synth.addEventListener) { synth.addEventListener('voiceschanged', pickVoice); }
-    listenBtn.addEventListener('click', function () {
-      narrOn = !narrOn; listenBtn.setAttribute('aria-pressed', narrOn ? 'true' : 'false');
-      if (narrOn) { pickVoice(); var c = currentSection(); if (c) { speak(c); } toast('Voce attiva: legge la sala in cui ti trovi'); }
-      else { synth.cancel(); narrSec = ''; }
-    });
+  function speak(sec) {
+    var text = C.voce && C.voce[sec.id];
+    stopVoice(); narrSec = sec.id; if (!text) { return; }
+    var my = token;
+    try {
+      var a = new Audio('assets/audio/' + sec.id + '.mp3'); a.preload = 'auto'; audioEl = a; var started = false;
+      a.addEventListener('playing', function () { started = true; });
+      a.addEventListener('error', function () { if (my === token && !started) { audioEl = null; if (hasTTS) { speakTTS(text, my); } } });
+      var pr = a.play(); if (pr && pr.catch) { pr.catch(function () { if (my === token && !started && hasTTS) { audioEl = null; speakTTS(text, my); } }); }
+    } catch (e) { if (hasTTS) { speakTTS(text, my); } }
   }
+  function narrFollow(sec) { if (!narrOn || !sec || sec.id === narrSec) { return; } clearTimeout(narrTimer); narrTimer = setTimeout(function () { var c = currentSection(); if (narrOn && c) { speak(c); } }, 1100); }
+  listenBtn.hidden = false; pickVoice();
+  if (hasTTS && synth.addEventListener) { synth.addEventListener('voiceschanged', pickVoice); }
+  listenBtn.addEventListener('click', function () {
+    narrOn = !narrOn; listenBtn.setAttribute('aria-pressed', narrOn ? 'true' : 'false');
+    if (narrOn) { pickVoice(); var c = currentSection(); if (c) { speak(c); } toast('Voce attiva: ti accompagna nei passaggi principali'); }
+    else { stopVoice(); narrSec = ''; }
+  });
 
   /* ---------- scorrimento ---------- */
   var heroEl = document.getElementById('hero'), heroIn = heroEl.querySelector('.hero-in');
@@ -305,5 +323,6 @@
   } else { Array.prototype.forEach.call(revs, function (r) { r.classList.add('in'); }); }
 
   renderMsgs(); updateKeys(); C.rooms.forEach(refreshRoom);
+  window.scrollTo(0, 0);
   if (state.quick) { setQuick(true); } else { onScroll(); }
 })();

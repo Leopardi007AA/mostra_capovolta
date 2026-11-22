@@ -59,3 +59,8 @@ Legenda: **[TU]** serve la scuola · **[FATTO]** già nel sito · **[OPZ]** faco
 - [TU] Confrontare la Sala 7 con l'Archivio di Stato di Rieti (fonte attuale: articolo di giornale locale)
 - [TU] Consensi per i nomi degli studenti nei crediti (la repo è pubblica)
 - [TU] Una testimonianza diretta (brano) e una foto/documento del vostro territorio
+
+## Aggiornamento 22 nov (mattina)
+- Il percorso si azzera a ogni ricarica (nessuna memoria, si riparte dall'inizio).
+- Quiz "Il falso innocuo" e domande della Pausa ridisegnati (contrasto, distanze, spunte grandi).
+- Voce: legge solo i passaggi chiave (`voce` in js/content.js). Per una voce umana, calda e profonda, registrare/generare file mp3 e metterli in `assets/audio/<id>.mp3` (id: hero, stanza, sala0, sala1…sala5, cronologia, sala6, uscita, territorio, fonti): il sito li usa in automatico; senza file usa la voce del browser.
