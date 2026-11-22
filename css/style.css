@@ -329,3 +329,9 @@ body.quick .pin .stage,.reduced .pin .stage{position:relative;top:0;height:auto}
 .doc .dq p{margin:0;font:italic 1.08rem/1.55 var(--serif);color:#f3ede2}
 .doc .dsrc{font-size:.85rem;color:var(--dim);margin:0 0 1rem}
 @media print{.doc{break-inside:avoid}}
+
+/* Logo della scuola: fisso in basso a destra, fuso con lo sfondo scuro */
+.schoolmark{position:fixed;right:max(12px,env(safe-area-inset-right,0px));bottom:max(10px,env(safe-area-inset-bottom,0px));z-index:30;width:124px;padding:7px 8px 6px;pointer-events:none;background:rgba(15,19,23,.93);border:1px solid rgba(185,138,74,.55);border-radius:2px;box-shadow:0 6px 18px rgba(0,0,0,.45);transition:opacity .3s}
+.schoolmark img{display:block;width:100%;height:auto;}
+@media(max-width:600px){.schoolmark{width:90px;padding:5px 6px 4px}}
+@media print{.schoolmark{display:none}}
