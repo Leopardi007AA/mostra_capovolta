@@ -320,3 +320,12 @@ body.quick .hero-intro span,.reduced .hero-intro span{opacity:1}
 body.quick .pin,.reduced .pin{height:auto!important}
 body.quick .pin .stage,.reduced .pin .stage{position:relative;top:0;height:auto}
 @media print{.pin{display:none}}
+
+/* Documento da vicino */
+.doc{border:1px solid var(--brass);background:rgba(185,138,74,.07);padding:1.2rem 1.3rem;margin:2rem 0;border-radius:var(--r)}
+.doc .kick{color:var(--accent);margin:0 0 .4rem}
+.doc h3{margin:.1rem 0 .9rem;font-size:1.15rem}
+.doc .dq{margin:0 0 .8rem;padding:.2rem 0 .2rem 1rem;border-left:3px solid var(--accent)}
+.doc .dq p{margin:0;font:italic 1.08rem/1.55 var(--serif);color:#f3ede2}
+.doc .dsrc{font-size:.85rem;color:var(--dim);margin:0 0 1rem}
+@media print{.doc{break-inside:avoid}}

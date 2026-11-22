@@ -18,6 +18,12 @@
   function seg(p, a, b) { return clamp((p - a) / (b - a), 0, 1); }
   function src(s) { return s ? '<span class="src">[' + esc(s) + ']</span>' : ''; }
   function words(text) { return esc(text).split(/\s+/).map(function (w) { return '<span>' + w + '</span>'; }).join(' '); }
+  function docHTML(d) {
+    if (!d) { return ''; }
+    return '<aside class="doc reveal"><p class="kick">' + esc(d.kick) + '</p><h3>' + esc(d.title) + '</h3>' +
+      d.quotes.map(function (q) { return '<blockquote class="dq"><p>' + esc(q) + '</p></blockquote>'; }).join('') +
+      '<p class="dsrc">Fonte: ' + esc(d.src) + '</p>' + labelsHTML(d.labels) + '</aside>';
+  }
   function labelsHTML(l) { var h = '<dl class="labels">'; for (var k in l) { h += '<div><dt>' + esc(k) + '</dt><dd>' + esc(l[k]) + '</dd></div>'; } return h + '</dl>'; }
   function factsHTML(f) { return '<ul class="facts">' + f.map(function (x) { return '<li>' + esc(x.text) + '</li>'; }).join('') + '</ul>'; }
 
@@ -74,7 +80,7 @@
     }).join('');
     html += '<section class="chapter" id="sala' + r.key + '" aria-label="Sala ' + r.key + '" data-scene="' + esc(r.scene) + '" data-total="' + total + '"><div class="pin"><div class="stage"><div class="stage-in"><svg viewBox="0 0 400 300" role="img" aria-label="Animazione: ' + esc(r.caption) + '"></svg><p class="stage-cap">' + esc(r.caption) + '</p></div></div></div>' +
       '<div class="flow"><header class="ch-head reveal"><p class="kick">Sala ' + r.key + ' di ' + C.rooms.length + '</p><h2 tabindex="-1">' + esc(r.title) + '</h2><p class="lead">' + esc(r.lead) + '</p></header>' +
-      '<p class="story words" data-w>' + esc(r.story) + '</p>' + classeHTML(r.classe) + figHTML(r.figure) + '<div class="reveal">' + factsHTML(r.facts) + '</div>' + memHTML(r.memoria) + '<div class="reveal"><h3>Ruolo · linguaggio · strumento · finalità</h3>' + labelsHTML(r.labels) + '</div>' +
+      '<p class="story words" data-w>' + esc(r.story) + '</p>' + classeHTML(r.classe) + figHTML(r.figure) + '<div class="reveal">' + factsHTML(r.facts) + '</div>' + memHTML(r.memoria) + docHTML(r.documento) + '<div class="reveal"><h3>Ruolo · linguaggio · strumento · finalità</h3>' + labelsHTML(r.labels) + '</div>' +
       '<div class="decoder reveal"><h3>Smaschera il messaggio</h3><p class="help">Clicca le frasi sottolineate del messaggio simulato: scopri il meccanismo e da dove viene.</p>' +
       '<span class="sim-badge">Simulazione didattica · gruppo inventato</span><p class="msg">' + msg + '</p><p class="progress" id="prog' + r.key + '" aria-live="polite"></p><div class="reveals" id="rev' + r.key + '"></div><div id="kb' + r.key + '"></div></div>' +
       '<p class="then reveal"><b>1937.</b> ' + esc(r.then) + '<br><b>2027.</b> ' + esc(r.diff) + '</p></div></section>';
@@ -222,7 +228,7 @@
   /* ---------- voce: legge il testo che hai davanti, andando avanti mentre scorri; ogni blocco una sola volta ---------- */
   var listenBtn = document.getElementById('listen'), narrOn = false, voice = null, token = 0, curBlk = null, readSet = [], idleT = null;
   var synth = window.speechSynthesis, hasTTS = !!(synth && window.SpeechSynthesisUtterance);
-  var BLK = '.hero-intro,.ch-head h2,.ch-head .lead,.story,.classe p,.memoria p,p.col,h2.col,.then';
+  var BLK = '.hero-intro,.ch-head h2,.ch-head .lead,.story,.classe p,.memoria p,.doc .dq p,p.col,h2.col,.then';
   function pickVoice() {
     if (!hasTTS) { return; }
     var vs = synth.getVoices().filter(function (v) { return /^it/i.test(v.lang.replace('_', '-')); });
