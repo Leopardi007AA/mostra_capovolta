@@ -86,7 +86,7 @@ window.CONTENT = {
     title: "Cinque messaggi chiusi a chiave",
     lead: "Questi messaggi sono inventati per questo progetto e riguardano un gruppo che non esiste: gli abitanti di Via del Molo. Non è un gioco: è l'unico modo per mostrare com'è fatto l'odio senza produrne di vero. Per leggerli devi capire come funzionano, e la chiave sta nel 1937.",
     badge: "Simulazione didattica · gruppo inventato",
-    classe: "Mettere insieme questi messaggi finti è stato facile, ed è questo il problema: bastano tre frasi e suonano già familiari. Quella familiarità è ciò che ci preoccupa di più.",
+    classe: "Mettere insieme messaggi finti come questi è facile, ed è questo il problema: bastano tre frasi e suonano già familiari. Quella familiarità è ciò che ci preoccupa di più.",
     figure: { img: "assets/img/porta.svg", alt: "Illustrazione di una porta socchiusa in una parete scura, da cui esce una striscia di luce sul pavimento.", caption: "Una porta socchiusa: la luce passa solo se qualcuno la apre." }
   },
 
@@ -95,7 +95,7 @@ window.CONTENT = {
     title: "8 novembre 1937",
     lead: "A Monaco si apre «Der Ewige Jude». Sembra un museo, ma è propaganda.",
     story: "La mostra viene inaugurata l'8 novembre 1937 e resta aperta fino a gennaio 1938. Presenta gli ebrei come un corpo estraneo che vive a spese della nazione, ne avvelena la cultura e ne sfrutta l'economia. È allestita con cartelli, vetrine e copie del giornale «Der Stürmer», come in un museo vero. Fa parte di una serie di «Schandausstellungen», mostre della vergogna. Nel 1940 ne verrà tratto anche un film. Più di cinquemila persone al giorno ci entrano per «informarsi».",
-    classe: "Ci colpisce il numero: 412.300. Non sono tutti fanatici, sono persone comuni che entrano per curiosità e escono con un'idea in più. Succede anche a noi quando apriamo un link senza pensarci.",
+    classe: "Ci colpisce il numero: 412.300. Non sono tutti fanatici, sono persone comuni che entrano per curiosità ed escono con un'idea in più. Succede anche a noi quando apriamo un link senza pensarci.",
     counter: { value: 412300, label: "visitatori in poco più di due mesi", note: "Più di 5.000 al giorno (S1)" },
     facts: [
       { text: "Inaugurazione: 8 novembre 1937, a Monaco di Baviera.", src: "S2" },
@@ -168,7 +168,7 @@ window.CONTENT = {
       story: "Il 14 luglio 1938 il «Giornale d'Italia» pubblica, senza firma, «Il fascismo e i problemi della razza»: è il Manifesto della razza, presentato come opera di studiosi ma voluto, scrive il Ministero, su indicazione diretta di Mussolini. Il 5 agosto esce il primo numero de «La difesa della razza», che lo ripubblica; la rivista andrà avanti fino al 1943. Il 5 settembre un regio decreto-legge vieta di iscrivere a scuola gli alunni «di razza ebraica» e allontana gli insegnanti. Dal giornale ai registri di classe passano meno di due mesi.",
       classe: "Questa è la sala che sentiamo più vicina, perché parla di scuola. Viene da chiedersi dove saremmo stati noi: in un banco, in cattedra, o seduti dietro a un compagno che non c'era più. Una risposta comoda non ce l'abbiamo, e forse è giusto così.",
       caption: "Scorri: cinque linguaggi diversi si fondono in un solo messaggio.",
-      figure: { img: "assets/img/banco-vuoto.svg", alt: "Illustrazione: un banco di scuola con la sedia scostata, vuoti, davanti a una finestra da cui entra un fascio di luce.", caption: "Un banco vuoto. Dal settembre 1938 per molti bambini ebrei significò questo: il posto in classe, perso con un decreto." },
+      figure: { img: "assets/img/banco-vuoto.svg", alt: "Illustrazione: un banco di scuola con la sedia scostata, entrambi vuoti, davanti a una finestra da cui entra un fascio di luce.", caption: "Un banco vuoto. Dal settembre 1938 per molti bambini ebrei significò questo: il posto in classe, perso con un decreto." },
       facts: [
         { text: "14 luglio 1938: il «Giornale d'Italia» pubblica, senza firma, «Il fascismo e i problemi della razza» (Manifesto della razza), voluto su indicazione diretta di Mussolini.", src: "S4, S5, S7" },
         { text: "5 agosto 1938: il Manifesto è ripubblicato su «La difesa della razza», rivista che esce fino al 1943 (ancora in edicola il 5 gennaio 1943).", src: "S3, S4" },
@@ -287,11 +287,11 @@ window.CONTENT = {
     ],
     fakesKick: "Il falso innocuo",
     fakesTitle: "Allenati su un tema innocuo",
-    fakesLead: "Per capire come funziona un falso credibile, abbiamo costruito tre messaggi su temi innocui, inventati da noi. Quale puoi verificare e quale no?",
+    fakesLead: "Per capire come funziona un falso credibile, abbiamo costruito tre messaggi su temi innocui, inventati per questo progetto. Quale puoi verificare e quale no?",
     fakes: [
       { post: "LA MENSA CHIUDE DA LUNEDÌ! Me l'ha detto un amico di mio cugino che lavora in comune. CONDIVIDI PRIMA CHE LO CANCELLINO!", isFake: true, explain: "Non verificabile: fonte di terza mano, tono d'urgenza, invito a condividere subito. Sono i segnali di un messaggio fatto per correre, non per essere controllato." },
       { post: "Circolare n. 41 · Il 25 novembre uscita anticipata alle 12.00 per assemblea d'istituto. Pubblicata sul sito ufficiale della scuola.", isFake: false, explain: "Verificabile: ha un numero, una data, un canale ufficiale dove ritrovarla. Puoi controllare prima di credere." },
-      { post: "STUDIO SEGRETO: il 9 studenti su 10 odia il lunedì. I media non vogliono dirtelo.", isFake: true, explain: "Non verificabile: nessun autore, nessun metodo, e un nemico vago («i media»). Un numero preciso senza fonte è una trappola." }
+      { post: "STUDIO SEGRETO: 9 studenti su 10 odiano il lunedì. I media non vogliono dirtelo.", isFake: true, explain: "Non verificabile: nessun autore, nessun metodo, e un nemico vago («i media»). Un numero preciso senza fonte è una trappola." }
     ]
   },
 
@@ -324,7 +324,7 @@ window.CONTENT = {
       "Il 6 gennaio 1944 quattordici persone, tra cui cinque bambini, vengono portate da Rieti al campo di Fossoli e poi ad Auschwitz. Donne, bambini e anziani vengono mandati direttamente nelle camere a gas. Un uomo di trent'anni, Leone, è scelto per il lavoro forzato e riceve il numero 180042. Sopravvive e torna a Rieti a cercare la sua famiglia (S9).",
       "Il 6 gennaio 2024, a ottanta anni di distanza, l'associazione Sabina Radicale ha posto una targa all'ingresso dell'ex carcere di Santa Scolastica, in via Terenzio Varrone (S9)."
     ],
-    classe: "Pensavamo che la Shoah fosse una cosa da libri e da film, lontana. Scoprire che è passata anche dalle nostre strade, vicino a posti che frequentiamo, ci toglie la possibilità di sentirci spettatori. Tra quei quattordici c'erano cinque bambini: più piccoli di noi, ma già abbastanza grandi per andare a scuola.",
+    classe: "Pensavamo che la Shoah fosse una cosa da libri e da film, lontana. Scoprire che è passata anche dalle nostre strade, vicino a posti che frequentiamo, ci toglie la possibilità di sentirci spettatori. Tra quei quattordici c'erano cinque bambini.",
     invito: "Tutte le informazioni di questa sala vengono da un articolo di giornale locale (S9). Prima di citarle in altri contesti vanno confrontate con l'Archivio di Stato di Rieti e con le fonti dell'ANED e della Fondazione CDEC."
   }
 };
